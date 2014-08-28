@@ -18,7 +18,8 @@
   },
   "licenses": [
     {
-      "type": "GPL"
+      "type": "GPL",
+      "url": "http://opensource.org/licenses/GPL-3.0"
     }
   ],
   "devDependencies": {
