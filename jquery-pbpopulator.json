@@ -1,0 +1,28 @@
+{
+  "name": "jquery-pbpopulator",
+  "title": "jQuery Pioneer's Bower Populator",
+  "description": "jQuery Pioneer's Bower Populator syncs values between form controls.",
+  "version": "0.0.1",
+  "homepage": "https://github.com/interactive-pioneers/jquery-pbpopulator.git",
+  "author": {
+    "name": "Ain Tohvri",
+    "url": "https://github.com/ain"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/interactive-pioneers/jquery-pbpopulator.git"
+  },
+  "bugs": "https://github.com/interactive-pioneers/jquery-pbpopulator/issues",
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://opensource.org/licenses/GPL-3.0"
+    }
+  ],
+  "dependencies": {
+    "jquery": "~1.9.0"
+  },
+  "keywords": [
+    "jquery-plugin"
+  ]
+}
