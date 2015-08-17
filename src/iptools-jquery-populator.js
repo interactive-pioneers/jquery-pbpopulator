@@ -94,7 +94,8 @@
     }
 
     function populateForControl(control, targetId) {
-      var $targetControl = $(parseId(targetId));
+      var $targetControl = $(targetId);
+      console.log('targetId', targetId)
       var targetType = getControlType($targetControl);
       if ($targetControl.length > 0) {
         switch (getControlType(control)) {
@@ -143,13 +144,13 @@
       }
     }
 
-    function parseId(str) {
-      var ids = str.replace(/\s+/g, '').split(',');
-      for (var i = 0, l = ids.length; i < l; i++) {
-        ids[i] = '#' + ids[i];
-      }
-      return ids.join(',');
-    }
+    //function parseId(str) {
+      //var ids = str.replace(/\s+/g, '').split(',');
+      //for (var i = 0, l = ids.length; i < l; i++) {
+        //ids[i] = '#' + ids[i];
+      //}
+      //return ids.join(',');
+    //}
 
     function init() {
       getTargeteers().each(function() {

@@ -9,16 +9,19 @@
   <div id="mocha"></div>
 
   <form action="#billing">
-    <select name="shipping_title">
+    <select name="billing_title" data-population-target="js_shipping_title">
       <option value="mr">Mr.</option>
-      <option value="ms">Ms.</option>
+      <option value="ms" selected="selected">Ms.</option>
       <option value="mrs">Mrs.</option>
     </select>
-    <input type="text" name="billing_forename" value="Max" data-population-target="js_shipping_forename">
-    <input type="text" name="billing_surname" value="Mustermann" data-population-target="js_shipping_surname">
-    <input type="email" name="billing_email" value="max@mustermann.com" data-population-target="js_shipping_email">
-    <input type="phone" name="billing_phone" value="+49893239893443" data-population-target="js_shipping_phone">
-    <input type="password" name="billing_password" data-population-target="js_billing_password_confirm,js_shipping_password,js_shipping_password_confirm">
+    <input type="text" name="billing_name" value="Max Mustermann" data-population-target="#js_shipping_name">
+    <input type="email" name="billing_email" value="max@mustermann.com" data-population-target="#js_shipping_email">
+    <input type="phone" name="billing_phone" value="+49893239893443" data-population-target="#js_shipping_phone">
+    <input type="radio" name="billing_payment" value="paypal" data-population-target="input[name=shipping_payment]">
+    <input type="radio" name="billing_payment" value="wire" data-population-target="input[name=shipping_payment]">
+    <input type="radio" name="billing_payment" value="creditcard" data-population-target="input[name=shipping_payment]" checked="checked">
+    <input type="checkbox" name="billing_express" data-population-target="#js_shipping_express">
+    <input type="password" name="billing_password" data-population-target="#js_billing_password_confirm,#js_shipping_password,#js_shipping_password_confirm">
     <input type="password" name="billing_password_confirm" id="js_billing_password_confirm">
   </form>
 
@@ -26,12 +29,15 @@
     <select name="shipping_title" id="js_shipping_title">
       <option value="mr">Mr.</option>
       <option value="ms">Ms.</option>
-      <option value="mrs">Mrs.</option>
+      <option value="mrs" selected="selected">Mrs.</option>
     </select>
-    <input type="text" name="shipping_forename" id="js_shipping_forename">
-    <input type="text" name="shipping_surname" id="js_shipping_surname">
+    <input type="text" name="shipping_name" id="js_shipping_name">
     <input type="email" name="shipping_email" id="js_shipping_email">
     <input type="phone" name="shipping_phone" id="js_shipping_phone">
+    <input type="radio" name="shipping_payment" value="paypal" checked="checked">
+    <input type="radio" name="shipping_payment" value="wire">
+    <input type="radio" name="shipping_payment" value="creditcard">
+    <input type="checkbox" name="shipping_express" id="js_shipping_express">
     <input type="password" name="shipping_password" id="js_shipping_password">
     <input type="password" name="shipping_password_confirm" id="js_shipping_password_confirm">
   </form>
@@ -43,6 +49,7 @@
   <script>var expect = chai.expect;</script>
   <script src="../src/iptools-jquery-populator.js"></script>
   <script src="spec/init.js"></script>
+  <script src="spec/populate.js"></script>
   <script src="spec/destroy.js"></script>
   <script>
     if (navigator.userAgent.indexOf('PhantomJS') < 0) {
