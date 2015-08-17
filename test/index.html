@@ -8,6 +8,34 @@
 <body>
   <div id="mocha"></div>
 
+  <form action="#billing">
+    <select name="shipping_title">
+      <option value="mr">Mr.</option>
+      <option value="ms">Ms.</option>
+      <option value="mrs">Mrs.</option>
+    </select>
+    <input type="text" name="billing_forename" value="Max" data-population-target="js_shipping_forename">
+    <input type="text" name="billing_surname" value="Mustermann" data-population-target="js_shipping_surname">
+    <input type="email" name="billing_email" value="max@mustermann.com" data-population-target="js_shipping_email">
+    <input type="phone" name="billing_phone" value="+49893239893443" data-population-target="js_shipping_phone">
+    <input type="password" name="billing_password" data-population-target="js_billing_password_confirm,js_shipping_password,js_shipping_password_confirm">
+    <input type="password" name="billing_password_confirm" id="js_billing_password_confirm">
+  </form>
+
+  <form action="#shipping">
+    <select name="shipping_title" id="js_shipping_title">
+      <option value="mr">Mr.</option>
+      <option value="ms">Ms.</option>
+      <option value="mrs">Mrs.</option>
+    </select>
+    <input type="text" name="shipping_forename" id="js_shipping_forename">
+    <input type="text" name="shipping_surname" id="js_shipping_surname">
+    <input type="email" name="shipping_email" id="js_shipping_email">
+    <input type="phone" name="shipping_phone" id="js_shipping_phone">
+    <input type="password" name="shipping_password" id="js_shipping_password">
+    <input type="password" name="shipping_password_confirm" id="js_shipping_password_confirm">
+  </form>
+
   <script src="../bower_components/jquery/jquery.js"></script>
   <script src="../bower_components/mocha/mocha.js"></script>
   <script src="../bower_components/chai/chai.js"></script>

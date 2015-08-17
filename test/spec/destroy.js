@@ -10,7 +10,7 @@
     };
 
     var pluginName = 'plugin_iptPopulator';
-    var selector = '.js_trigger-populator';
+    var selector = 'form:first';
     var object = null;
 
     describe('destroy', function() {
@@ -20,7 +20,7 @@
       });
 
       afterEach(function() {
-        $(selector).off();
+        $(selector).unbind();
       });
 
       it('expected to remove data', function() {

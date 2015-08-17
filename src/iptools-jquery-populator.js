@@ -9,16 +9,23 @@
     var defaults = {};
 
     this.element = $(element);
-    this.options = $.extend({}, defaults, options);
+    this.settings = $.extend({}, defaults, options);
 
     var self = this;
 
+    this.destroy = function() {
+      removeEventListeners();
+      this.element.removeData('plugin_' + pluginName);
+    };
+
+    // TODO: evaluate use-case, possibly refactor/remove.
     this.populateOptional = function() {
       $('*[data-population-target-optional]').each(function() {
         populateForControl(this, $(this).attr('data-population-target-optional'));
       });
     };
 
+    // TODO: namespace events.
     function addEventListener(control) {
       switch (getControlType(control)) {
         case 'input_text':
@@ -33,8 +40,14 @@
       }
     }
 
+    function removeEventListeners() {
+      $('*[data-population-target]').each(function() {
+        $(this).unbind('blur change');
+      });
+    }
+
     function getControlType(control) {
-      var tag = $(control).prop('tagName').toLowerCase();
+      var tag = $(control).attr('tagName').toLowerCase();
       var type = tag;
       if (tag === 'input') {
         type += '_' + $(control).attr('type');

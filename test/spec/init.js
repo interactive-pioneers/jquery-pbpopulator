@@ -10,7 +10,7 @@
     };
 
     var pluginName = 'plugin_iptPopulator';
-    var selector = '.js_trigger-populator';
+    var selector = 'form:first';
     var object = null;
 
     describe('init', function() {
@@ -24,7 +24,7 @@
       });
 
       it('expected to construct object', function() {
-        return expect(object).to.be.an.object;
+        return expect(object).to.not.be.null;
       });
 
     });
