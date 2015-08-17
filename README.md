@@ -9,6 +9,8 @@ jQuery populator plugin syncs values between form controls.
 
 ## Options
 
+_Coming soon_.
+
 ## Requirements
 
 - jQuery 1.9.0 or greater
