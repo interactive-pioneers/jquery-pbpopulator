@@ -25,10 +25,10 @@
         case 'input_password':
         case 'input_phone':
         case 'input_email':
-          $(control).on('blur', populate);
+          $(control).bind('blur', populate);
           break;
         default:
-          $(control).on('change', populate);
+          $(control).bind('change', populate);
           break;
       }
     }
