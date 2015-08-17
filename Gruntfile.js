@@ -1,103 +1,134 @@
 'use strict';
 
-module.exports = function (grunt) {
-  // Load all grunt tasks
-  require('load-grunt-tasks')(grunt);
-  // Show elapsed time at the end
+module.exports = function(grunt) {
+  // show elapsed time at the end
   require('time-grunt')(grunt);
 
-  // Project configuration.
+  // load tasks on demand (speeds up dev)
+  require('jit-grunt')(grunt, {
+  });
+
   grunt.initConfig({
-    // Metadata.
-    pkg: grunt.file.readJSON('package.json'),
-    banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-      '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-      '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-      '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-      ' Licensed GPLv3 */\n',
-    // Task configuration.
-    clean: {
-      files: ['dist']
-    },
-    concat: {
-      options: {
-        banner: '<%= banner %>',
-        stripBanners: true
+    yeoman: {
+      src: 'src',
+      dist: 'dist',
+      test: 'test',
+      pkg: grunt.file.readJSON('package.json'),
+      meta: {
+        banner: '/*! <%= yeoman.pkg.name %> - v<%= yeoman.pkg.version %> - ' +
+          '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+          '* <%= yeoman.pkg.homepage %>\n' +
+          '* Copyright © <%= grunt.template.today("yyyy") %> ' +
+          '<%= yeoman.pkg.author.name %>; Licensed <%= yeoman.pkg.license %> */\n'
       },
-      dist: {
-        src: ['src/<%= pkg.name %>.js'],
-        dest: 'dist/jquery.<%= pkg.name %>.js'
-      }
     },
-    uglify: {
-      options: {
-        banner: '<%= banner %>'
+    watch: {
+      qa: {
+        files: [
+          '<%= yeoman.src %>/iptools-jquery-populator.js',
+          '<%= yeoman.test %>/spec/test.js'
+        ],
+        tasks: ['concurrent:qa']
       },
-      dist: {
-        src: '<%= concat.dist.dest %>',
-        dest: 'dist/jquery.<%= pkg.name %>.min.js'
-      }
-    },
-    qunit: {
-      all: {
-        options: {
-          urls: ['http://localhost:9000/test/<%= pkg.name %>.html']
-        }
+      bdd: {
+        files: [
+          '<%= yeoman.src %>/iptools-jquery-populator.js',
+          '<%= yeoman.test %>/spec/*.js',
+          '<%= yeoman.test %>/index.html'
+        ],
+        tasks: ['test']
       }
     },
     jshint: {
       options: {
-        reporter: require('jshint-stylish')
+        jshintrc: '.jshintrc'
       },
-      gruntfile: {
+      all: [
+        'Gruntfile.js',
+        '<%= yeoman.src %>/{,*/}*.js',
+        '<%= yeoman.test %>/spec/{,*/}*.js'
+      ]
+    },
+    mocha: {
+      all: {
         options: {
-          jshintrc: '.jshintrc'
+          run: true,
+          log: true
         },
-        src: 'Gruntfile.js'
-      },
-      src: {
-        options: {
-          jshintrc: 'src/.jshintrc'
-        },
-        src: ['src/**/*.js']
-      },
-      test: {
-        options: {
-          jshintrc: 'test/.jshintrc'
-        },
-        src: ['test/**/*.js']
+        src: ['<%= yeoman.test %>/index.html']
       }
     },
-    watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
+    concurrent: {
+      qa: {
+        tasks: [
+          'jshint',
+          'jscs',
+          'mocha'
+        ]
       },
-      src: {
-        files: '<%= jshint.src.src %>',
-        tasks: ['jshint:src', 'qunit']
-      },
-      test: {
-        files: '<%= jshint.test.src %>',
-        tasks: ['jshint:test', 'qunit']
+      build: {
+        tasks: [
+          'uglify',
+          'sass'
+        ]
       }
     },
-    connect: {
-      server: {
-        options: {
-          hostname: '*',
-          port: 9000
+    uglify: {
+      options: {
+        banner: '<%= yeoman.meta.banner %>'
+      },
+      dist: {
+        files: {
+          '<%= yeoman.dist %>/iptools-jquery-populator.min.js': ['<%= yeoman.src %>/iptools-jquery-populator.js']
         }
+      }
+    },
+    clean: {
+      dist: {
+        files: [{
+          dot: true,
+          src: [
+            '<%= yeoman.dist %>/*'
+          ]
+        }]
+      }
+    },
+    sass: {
+      options: {
+        sourceMap: false
+      },
+      dist: {
+        files: {
+          '<%= yeoman.dist %>/iptools-jquery-populator.css' : '<%= yeoman.src %>/iptools-jquery-populator.scss'
+        }
+      }
+    },
+    jscs: {
+      options: {
+        config: '.jscsrc',
+        esnext: false,
+        verbose: true
+      },
+      files: {
+        src: [
+          'Gruntfile.js',
+          '<%= yeoman.test %>/spec/*.js',
+          '<%= yeoman.src %>/*.js'
+        ]
       }
     }
   });
 
-  // Default task.
-  grunt.registerTask('default', ['jshint', 'connect', 'qunit', 'clean', 'concat', 'uglify']);
-  grunt.registerTask('server', function () {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve']);
-  });
-  grunt.registerTask('serve', ['connect', 'watch']);
-  grunt.registerTask('test', ['jshint', 'connect', 'qunit']);
+  grunt.registerTask('test', ['mocha']);
+  grunt.registerTask('qa', ['concurrent:qa']);
+
+  grunt.registerTask('build', [
+    'concurrent:qa',
+    'clean:dist',
+    'concurrent:build'
+  ]);
+
+  grunt.registerTask('default', ['build']);
+
+  grunt.registerTask('travis', ['concurrent:qa']);
 };
