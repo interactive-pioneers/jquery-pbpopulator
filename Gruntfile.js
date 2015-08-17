@@ -26,7 +26,9 @@ module.exports = function(grunt) {
       qa: {
         files: [
           '<%= yeoman.src %>/iptools-jquery-populator.js',
-          '<%= yeoman.test %>/spec/*.js'
+          '<%= yeoman.test %>/spec/*.js',
+          '<%= yeoman.test %>/index.html',
+          'Gruntfile.js'
         ],
         tasks: ['concurrent:qa']
       },
