@@ -13,7 +13,7 @@ _Coming soon_.
 
 ## Requirements
 
-- jQuery 1.9.0 or greater
+- jQuery 1.3.2 or greater
 
 ## Example
 
