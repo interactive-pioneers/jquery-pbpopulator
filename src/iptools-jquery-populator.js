@@ -8,6 +8,12 @@
 
     var defaults = {};
 
+    var datas = {
+      populationTarget: 'population-target',
+      optionalPopulationTarget: 'population-target-optional',
+      defaultValueError: 'population-error-default-value'
+    };
+
     this.element = $(element);
     this.settings = $.extend({}, defaults, options);
 
@@ -20,10 +26,26 @@
 
     // TODO: evaluate use-case, possibly refactor/remove.
     this.populateOptional = function() {
-      $('*[data-population-target-optional]').each(function() {
-        populateForControl(this, $(this).attr('data-population-target-optional'));
+      getOptionalTargeteers().each(function() {
+        populateForControl(this, getOptionalPopulationTarget(this));
       });
     };
+
+    function getPopulationTarget(control) {
+      return $(control).attr('data-' + datas.populationTarget);
+    }
+
+    function getOptionalPopulationTarget(control) {
+      return $(control).attr('data-' + datas.optionalPopulationTarget);
+    }
+
+    function getOptionalTargeteers() {
+      return $('*[data-' + datas.optionalPopulationTarget + ']');
+    }
+
+    function getTargeteers() {
+      return $('*[data-' + datas.populationTarget + ']');
+    }
 
     // TODO: namespace events.
     function addEventListener(control) {
@@ -41,7 +63,7 @@
     }
 
     function removeEventListeners() {
-      $('*[data-population-target]').each(function() {
+      getTargeteers().each(function() {
         $(this).unbind('blur change');
       });
     }
@@ -57,7 +79,7 @@
 
     function populate(event) {
       var element = event.currentTarget;
-      populateForControl(element, $(element).attr('data-population-target'));
+      populateForControl(element, getPopulationTarget(element));
     }
 
     function hasSelectMatch(control, value) {
@@ -79,6 +101,7 @@
           case 'input_checkbox':
             switch (targetType) {
               case 'input_hidden':
+                // FIXME: prop dysfunctional at 1.3.2
                 if ($(control).prop('checked')) {
                   $targetControl.val(1).prop('disabled', false);
                 } else {
@@ -102,7 +125,7 @@
                 target: $targetControl, source: $(control)
               });
             } else {
-              var errorDefaultValue = $targetControl.data('population-error-default-value');
+              var errorDefaultValue = $targetControl.attr('data-' + datas.defaultValueError);
               if (errorDefaultValue && hasSelectMatch($targetControl, errorDefaultValue)) {
                 $targetControl.val(errorDefaultValue);
               }
@@ -129,7 +152,7 @@
     }
 
     function init() {
-      $('*[data-population-target]').each(function() {
+      getTargeteers().each(function() {
         addEventListener(this);
       });
     }
