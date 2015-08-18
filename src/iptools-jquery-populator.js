@@ -10,7 +10,7 @@
 
     var datas = {
       populationTarget: 'population-target',
-      optionalPopulationTarget: 'population-target-optional',
+      manualPopulationTarget: 'population-target-manual',
       defaultValueError: 'population-error-default-value'
     };
 
@@ -29,10 +29,9 @@
       populateForControl(element, target);
     };
 
-    // TODO: evaluate use-case, possibly refactor/remove.
-    this.populateOptional = function() {
-      getOptionalTargeteers().each(function() {
-        populateForControl(this, getOptionalPopulationTarget(this));
+    this.populateManual = function() {
+      getManualTargeteers().each(function() {
+        populateForControl(this, getManualPopulationTarget(this));
       });
     };
 
@@ -40,12 +39,12 @@
       return $(control).attr('data-' + datas.populationTarget);
     }
 
-    function getOptionalPopulationTarget(control) {
-      return $(control).attr('data-' + datas.optionalPopulationTarget);
+    function getManualPopulationTarget(control) {
+      return $(control).attr('data-' + datas.manualPopulationTarget);
     }
 
-    function getOptionalTargeteers() {
-      return self.element.find('*[data-' + datas.optionalPopulationTarget + ']');
+    function getManualTargeteers() {
+      return self.element.find('*[data-' + datas.manualPopulationTarget + ']');
     }
 
     function getTargeteers() {
@@ -110,6 +109,7 @@
       var targetType = getControlType($targetControl);
       if ($targetControl.length > 0) {
         switch (getControlType(control)) {
+          case 'input_radio':
           case 'input_checkbox':
             switch (targetType) {
               case 'input_hidden':
@@ -119,6 +119,7 @@
                   $targetControl.attr('disabled', true).removeAttr('value');
                 }
                 break;
+              case 'input_radio':
               case 'input_checkbox':
                 $targetControl.attr('checked', $(control).attr('checked'));
                 break;
