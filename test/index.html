@@ -42,6 +42,10 @@
     <input type="password" name="shipping_password_confirm" id="js_shipping_password_confirm">
   </form>
 
+  <form action="#outside-scope">
+    <input type="text" name="name" data-population-target="js_shipping_name" value="outside scope name">
+  </form>
+
   <script src="../bower_components/jquery/jquery.js"></script>
   <script src="../bower_components/mocha/mocha.js"></script>
   <script src="../bower_components/chai/chai.js"></script>

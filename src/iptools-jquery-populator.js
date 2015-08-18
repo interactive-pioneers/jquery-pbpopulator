@@ -45,14 +45,13 @@
     }
 
     function getOptionalTargeteers() {
-      return $('*[data-' + datas.optionalPopulationTarget + ']');
+      return self.element.find('*[data-' + datas.optionalPopulationTarget + ']');
     }
 
     function getTargeteers() {
-      return $('*[data-' + datas.populationTarget + ']');
+      return self.element.find('*[data-' + datas.populationTarget + ']');
     }
 
-    // TODO: namespace events.
     function addEventListener(control) {
       switch (getControlType(control)) {
         case 'input_text':
