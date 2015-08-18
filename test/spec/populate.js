@@ -89,9 +89,15 @@
         });
 
         it('expected to populate checkbox value', function() {
-          var ctrl = object.find('input[name=billing_express]').trigger('change');
+          var ctrl = object.find('input[name=billing_express]').attr('checked', true).trigger('change');
           var value = $(ctrl.attr('data-population-target')).val();
-          return expect(value).to.equal(ctrl.val());
+          return expect(value).to.equal('on');
+        });
+
+        it('expected to populate unchecked checkbox value', function() {
+          var ctrl = object.find('input[name=billing_express]').attr('checked', false).trigger('change');
+          var value = $(ctrl.attr('data-population-target')).val();
+          return expect(value).to.equal('');
         });
 
         it('expected to populate radio value', function() {
