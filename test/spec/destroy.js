@@ -23,6 +23,10 @@
         $(selector).unbind();
       });
 
+      it('expected to respond', function() {
+        expect(object.data(pluginName)).to.respondTo('destroy');
+      });
+
       it('expected to remove data', function() {
         object.data(pluginName).destroy();
         return expect(object.data(pluginName)).to.not.be.ok;
