@@ -24,6 +24,11 @@
       this.element.removeData('plugin_' + pluginName);
     };
 
+    this.populate = function(element) {
+      var target = getPopulationTarget(element);
+      populateForControl(element, target);
+    };
+
     // TODO: evaluate use-case, possibly refactor/remove.
     this.populateOptional = function() {
       getOptionalTargeteers().each(function() {
@@ -54,12 +59,16 @@
         case 'input_password':
         case 'input_phone':
         case 'input_email':
-          $(control).bind('blur', populate);
+          $(control).bind('blur', handlePopulationRequest);
           break;
         default:
-          $(control).bind('change', populate);
+          $(control).bind('change', handlePopulationRequest);
           break;
       }
+    }
+
+    function handlePopulationRequest(event) {
+      self.populate(event.currentTarget);
     }
 
     function removeEventListeners() {
@@ -69,17 +78,13 @@
     }
 
     function getControlType(control) {
-      var tag = $(control).attr('tagName').toLowerCase();
+      var tagName = $(control).attr('tagName');
+      var tag = tagName.toLowerCase();
       var type = tag;
       if (tag === 'input') {
         type += '_' + $(control).attr('type');
       }
       return type;
-    }
-
-    function populate(event) {
-      var element = event.currentTarget;
-      populateForControl(element, getPopulationTarget(element));
     }
 
     function hasSelectMatch(control, value) {
@@ -95,22 +100,23 @@
 
     function populateForControl(control, targetId) {
       var $targetControl = $(targetId);
-      console.log('targetId', targetId)
+      if ($targetControl.length === 0) {
+        throw new TypeError('Invalid population target. Target not found.');
+      }
       var targetType = getControlType($targetControl);
       if ($targetControl.length > 0) {
         switch (getControlType(control)) {
           case 'input_checkbox':
             switch (targetType) {
               case 'input_hidden':
-                // FIXME: prop dysfunctional at 1.3.2
-                if ($(control).prop('checked')) {
-                  $targetControl.val(1).prop('disabled', false);
+                if ($(control).attr('checked')) {
+                  $targetControl.val(1).attr('disabled', false);
                 } else {
-                  $targetControl.prop('disabled', true).removeAttr('value');
+                  $targetControl.attr('disabled', true).removeAttr('value');
                 }
                 break;
               case 'input_checkbox':
-                $targetControl.prop('checked', $(control).prop('checked'));
+                $targetControl.attr('checked', $(control).attr('checked'));
                 break;
               default:
                 $targetControl.val($(control).val());
@@ -143,14 +149,6 @@
         $targetControl.trigger('change', $(control));
       }
     }
-
-    //function parseId(str) {
-      //var ids = str.replace(/\s+/g, '').split(',');
-      //for (var i = 0, l = ids.length; i < l; i++) {
-        //ids[i] = '#' + ids[i];
-      //}
-      //return ids.join(',');
-    //}
 
     function init() {
       getTargeteers().each(function() {

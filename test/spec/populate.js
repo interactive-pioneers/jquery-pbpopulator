@@ -23,6 +23,30 @@
         object.data(pluginName).destroy();
       });
 
+      context('with invalid target selector', function() {
+
+        var backup = null;
+        var name = null;
+
+        beforeEach(function() {
+          name = object.find('input[name=billing_name]');
+          backup = name.attr('data-population-target');
+          name.attr('data-population-target', 'invalid-selector');
+        });
+
+        afterEach(function() {
+          name.attr('data-population-target', backup);
+        });
+
+        it('expected to throw error', function() {
+          function test() {
+            object.data(pluginName).populate(name);
+          }
+          expect(test).to.throw(TypeError, /Invalid population target. Target not found./);
+        });
+
+      });
+
       context('with blur', function() {
 
         it('expected to populate text field value', function() {
@@ -67,7 +91,7 @@
         });
 
         it('expected to populate radio value', function() {
-          var ctrl = object.find('input[name=billing_payment]').trigger('change');
+          var ctrl = object.find('input[name=billing_payment]').eq(0).attr('checked', true).trigger('change');
           var value = $(ctrl.attr('data-population-target')).val();
           return expect(value).to.equal(ctrl.val());
         });
@@ -77,7 +101,7 @@
       context('with multiple targets', function() {
 
         it('expected to populate password field value to all targets', function() {
-          var ctrl = object.find('input[name=billing_password]').val('form-field-population').trigger('blur');
+          var ctrl = object.find('input[name=billing_password]').eq(0).attr('checked', true).trigger('blur');
           var targets = ctrl.attr('data-population-target').split(',');
           var value1 = $(targets[0]).val();
           var value2 = $(targets[1]).val();
