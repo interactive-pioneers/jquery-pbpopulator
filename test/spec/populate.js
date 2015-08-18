@@ -23,6 +23,10 @@
         object.data(pluginName).destroy();
       });
 
+      it('expected to respond', function() {
+        expect(object.data(pluginName)).to.respondTo('populate');
+      });
+
       context('with invalid target selector', function() {
 
         var backup = null;
