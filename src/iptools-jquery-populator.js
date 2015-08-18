@@ -59,12 +59,16 @@
         case 'input_password':
         case 'input_phone':
         case 'input_email':
-          $(control).bind('blur', handlePopulationRequest);
+          $(control).bind(getNamespacedEvent('blur'), handlePopulationRequest);
           break;
         default:
-          $(control).bind('change', handlePopulationRequest);
+          $(control).bind(getNamespacedEvent('change'), handlePopulationRequest);
           break;
       }
+    }
+
+    function getNamespacedEvent(event) {
+      return event + '.' + pluginName;
     }
 
     function handlePopulationRequest(event) {
@@ -73,7 +77,8 @@
 
     function removeEventListeners() {
       getTargeteers().each(function() {
-        $(this).unbind('blur change');
+        $(this).unbind(getNamespacedEvent('blur'))
+          .unbind(getNamespacedEvent('change'));
       });
     }
 
