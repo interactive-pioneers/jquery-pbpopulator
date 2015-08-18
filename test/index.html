@@ -18,11 +18,13 @@
     <input type="email" name="billing_email" value="max@mustermann.com" data-population-target="#js_shipping_email">
     <input type="phone" name="billing_phone" value="+49893239893443" data-population-target="#js_shipping_phone">
     <input type="radio" name="billing_payment" value="paypal" data-population-target="input[name=shipping_payment]">
+    <input type="text" name="billing_city" value="Hamburg" data-population-target="#js_shipping_city">
     <input type="radio" name="billing_payment" value="wire" data-population-target="input[name=shipping_payment]">
     <input type="radio" name="billing_payment" value="creditcard" data-population-target="input[name=shipping_payment]" checked="checked">
     <input type="checkbox" name="billing_express" data-population-target="#js_shipping_express">
     <input type="password" name="billing_password" data-population-target="#js_billing_password_confirm,#js_shipping_password,#js_shipping_password_confirm">
     <input type="password" name="billing_password_confirm" id="js_billing_password_confirm">
+    <input type="hidden" name="billing_hash" value="43909fs09f5jk6j5j49138otr7834" data-population-target="#js_shipping_hash">
   </form>
 
   <form action="#shipping">
@@ -40,6 +42,8 @@
     <input type="checkbox" name="shipping_express" id="js_shipping_express">
     <input type="password" name="shipping_password" id="js_shipping_password">
     <input type="password" name="shipping_password_confirm" id="js_shipping_password_confirm">
+    <input type="hidden" name="shipping_city" id="js_shipping_city">
+    <input type="hidden" name="shipping_hash" id="js_shipping_hash">
   </form>
 
   <form action="#outside-scope">

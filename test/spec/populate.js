@@ -78,6 +78,12 @@
           return expect(value).to.equal(ctrl.val());
         });
 
+        it('expected to populate text field value to hidden input', function() {
+          var ctrl = object.find('input[name=billing_city]').trigger('blur');
+          var value = $(ctrl.attr('data-population-target')).val();
+          return expect(value).to.equal(ctrl.val());
+        });
+
       });
 
       context('with change', function() {
@@ -102,6 +108,12 @@
 
         it('expected to populate radio value', function() {
           var ctrl = object.find('input[name=billing_payment]').eq(0).attr('checked', true).trigger('change');
+          var value = $(ctrl.attr('data-population-target')).val();
+          return expect(value).to.equal(ctrl.val());
+        });
+
+        it('expected to populate hidden field value', function() {
+          var ctrl = object.find('input[name=billing_hash]').trigger('change');
           var value = $(ctrl.attr('data-population-target')).val();
           return expect(value).to.equal(ctrl.val());
         });
