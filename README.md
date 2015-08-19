@@ -24,6 +24,25 @@ All options are delivered over data attributes on form controls which values sho
 | `data-population-target` | Single or comma-separated list of selectors for form controls receiving data on `change` or `blur` events |
 | `data-population-target-manual` | Single or comma-separated list of selectors for form controls receiving data on `populateManual()` method call |
 
+## Events
+
+Events are dispatched on element that populator was initialised on, e.g. `<form>`.
+
+| Event | Description |
+| ------ | ----------- |
+| `success` | Dispatched whenever value was populated successfully. |
+| `error` | Dispatched whenever values was popuplated erroneously. |
+
+Event structure:
+
+```js
+{
+  type: '<event type>', // populationMismatch or populationSuccess
+  target: '<jQuery Object>', // target element receiving populated value
+  source: '<jQuery Object>', // source element defining populated
+}
+```
+
 ## Requirements
 
 - jQuery 1.3.2 or greater
