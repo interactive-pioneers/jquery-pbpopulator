@@ -97,17 +97,27 @@
         });
 
         it('expected to populate checkbox value', function() {
-          var ctrl = object.find('input[name=billing_express]').attr('checked', true);
+          var ctrl = object.find('input[name=billing_express]');
+          if (ctrl.prop) {
+            ctrl.prop('checked', true);
+          } else {
+            ctrl.attr('checked', true);
+          }
           object.data(pluginName).populateManual();
-          var value = $(ctrl.attr('data-population-target-manual')).val();
-          return expect(value).to.equal('on');
+          var checked = $(ctrl.attr('data-population-target-manual')).is(':checked');
+          return expect(checked).to.be.ok;
         });
 
         it('expected to populate unchecked checkbox value', function() {
-          var ctrl = object.find('input[name=billing_express]').attr('checked', false);
+          var ctrl = object.find('input[name=billing_express]');
+          if (ctrl.prop) {
+            ctrl.prop('checked', false);
+          } else {
+            ctrl.attr('checked', false);
+          }
           object.data(pluginName).populateManual();
-          var value = $(ctrl.attr('data-population-target-manual')).val();
-          return expect(value).to.equal('');
+          var checked = $(ctrl.attr('data-population-target-manual')).is(':checked');
+          return expect(checked).to.not.be.ok;
         });
 
         it('expected to populate radio value', function() {

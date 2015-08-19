@@ -112,7 +112,7 @@
           case 'input_checkbox':
             switch (targetType) {
               case 'input_hidden':
-                if ($(control).attr('checked')) {
+                if ($(control).is(':checked')) {
                   $targetControl.val(1).attr('disabled', false);
                 } else {
                   $targetControl.attr('disabled', true).removeAttr('value');
@@ -120,7 +120,11 @@
                 break;
               case 'input_radio':
               case 'input_checkbox':
-                $targetControl.attr('checked', $(control).attr('checked'));
+                if ($(control).prop) {
+                  $targetControl.prop('checked', $(control).prop('checked'));
+                } else {
+                  $targetControl.attr('checked', $(control).attr('checked'));
+                }
                 break;
               default:
                 $targetControl.val($(control).val());
