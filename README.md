@@ -2,6 +2,12 @@
 
 jQuery populator plugin syncs values between form controls.
 
+## Installation
+
+```
+bower install iptools-jquery-populator
+```
+
 ## Features
 
 - Populate values automatically from one form control to the other on its `change` or `blur` events based on `data-population-target` attribute
