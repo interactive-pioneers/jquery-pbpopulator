@@ -1,7 +1,7 @@
 {
   "name": "iptools-jquery-populator",
   "version": "0.1.0",
-  "description": "jQuery populator plugin syncs values between form controls",
+  "description": "jQuery plugin that populates form control value(s) to other control(s)",
   "homepage": "https://github.com/interactive-pioneers/iptools-jquery-populator",
   "bugs": "https://github.com/interactive-pioneers/iptools-jquery-populator/issues",
   "author": {
