@@ -49,13 +49,12 @@ Event structure:
 
 ## Example
 
-_Coming soon_.
 ```html
-<form action="/billing">
-  <input type="text" name="billing_name" value="Max Mustermann" data-population-target="#js_shipping_name">
+<form action="/billing" method="post">
+  <input type="text" data-population-target="#js_shipping_name" name="billing_name" value="Interactive Pioneers GmbH">
 </form>
 
-<form action="/shipping">
+<form action="/shipping" method="post">
   <input type="text" name="shipping_name" id="js_shipping_name">
 </form>
 
