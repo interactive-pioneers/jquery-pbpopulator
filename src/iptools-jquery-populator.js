@@ -81,8 +81,7 @@
     }
 
     function getControlType(control) {
-      var tagName = $(control).attr('tagName');
-      var tag = tagName.toLowerCase();
+      var tag = $(control).tagName().toLowerCase();
       var type = tag;
       if (tag === 'input') {
         type += '_' + $(control).attr('type');
@@ -166,6 +165,13 @@
 
     init();
   }
+
+  $.fn.tagName = function() {
+    if (this.prop) {
+      return this.prop('tagName');
+    }
+    return this.attr('tagName');
+  };
 
   $.fn[pluginName] = function(options) {
     return this.each(function() {
