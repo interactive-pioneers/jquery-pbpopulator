@@ -4,12 +4,19 @@ jQuery populator plugin syncs values between form controls.
 
 ## Features
 
-- Populate values from one form control to the other using data
-  attributes.
+- Populate values automatically from one form control to the other on its `change` or `blur` events based on `data-population-target` attribute
+- Populate values manually from one form control to the other with `populateManual()` method call based on `data-population-target-manual` attribute
+- Listen to population to retrieve event `type`, `source` and `target` controls of the population
+- Populate single value to multiple targets
 
 ## Options
 
-_Coming soon_.
+All options are delivered over data attributes on form controls which values should be populated to other control(s).
+
+| Option | Description |
+| ------ | ----------- |
+| `data-population-target` | Single or comma-separated list of selectors for form controls receiving data on `change` or `blur` events |
+| `data-population-target-manual` | Single or comma-separated list of selectors for form controls receiving data on `populateManual()` method call |
 
 ## Requirements
 
