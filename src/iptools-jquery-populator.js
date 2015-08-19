@@ -134,7 +134,8 @@
               $targetControl.val(targetedValue);
               self.element.trigger('success', {
                 type: 'populationSuccess',
-                target: $targetControl, source: $(control)
+                target: $targetControl,
+                source: $(control)
               });
             } else {
               var errorDefaultValue = $targetControl.attr('data-' + datas.defaultValueError);
@@ -143,7 +144,8 @@
               }
               self.element.trigger('error', {
                 type: 'populationMismatch',
-                target: $targetControl, source: $(control)
+                target: $targetControl,
+                source: $(control)
               });
             }
             break;
