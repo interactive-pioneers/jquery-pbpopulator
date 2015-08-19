@@ -1,6 +1,6 @@
 # iptools-jquery-populator [![Build Status](http://img.shields.io/travis/interactive-pioneers/iptools-jquery-populator.svg)](https://travis-ci.org/interactive-pioneers/iptools-jquery-populator)
 
-jQuery populator plugin syncs values between form controls.
+jQuery plugin that populates form control value(s) to other control(s).
 
 ## Installation
 
