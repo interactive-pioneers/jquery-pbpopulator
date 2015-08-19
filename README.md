@@ -59,7 +59,7 @@ Event structure:
 </form>
 
 <script>
-jQuery.ready(function() {
+jQuery(document).ready(function($) {
   $('form:first').iptPopulator();
 });
 </script>
