@@ -6,16 +6,13 @@
 
   describe('iptPopulator', function() {
 
-    var config = {
-    };
-
     var selector = 'form:first';
     var object = null;
 
     describe('populate', function() {
 
       beforeEach(function() {
-        object = $(selector).iptPopulator(config);
+        object = $(selector).iptPopulator();
       });
 
       afterEach(function() {

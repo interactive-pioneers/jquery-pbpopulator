@@ -6,9 +6,6 @@
 
   describe('iptPopulator', function() {
 
-    var config = {
-    };
-
     var pluginName = 'plugin_iptPopulator';
     var selector = 'form:first';
     var object = null;
@@ -16,7 +13,7 @@
     describe('init', function() {
 
       beforeEach(function() {
-        object = $(selector).iptPopulator(config);
+        object = $(selector).iptPopulator();
       });
 
       afterEach(function() {
