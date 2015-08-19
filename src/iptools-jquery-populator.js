@@ -132,11 +132,6 @@
             var targetedValue = $(control).val();
             if (hasSelectMatch($targetControl, targetedValue)) {
               $targetControl.val(targetedValue);
-              self.element.trigger('success', {
-                type: 'populationSuccess',
-                target: $targetControl,
-                source: $(control)
-              });
             } else {
               var errorDefaultValue = $targetControl.attr('data-' + datas.defaultValueError);
               if (errorDefaultValue && hasSelectMatch($targetControl, errorDefaultValue)) {
@@ -147,6 +142,7 @@
                 target: $targetControl,
                 source: $(control)
               });
+              return false;
             }
             break;
           default:
@@ -154,6 +150,11 @@
             break;
         }
         $targetControl.trigger('change', $(control));
+        self.element.trigger('success', {
+          type: 'populationSuccess',
+          target: $targetControl,
+          source: $(control)
+        });
       }
     }
 
