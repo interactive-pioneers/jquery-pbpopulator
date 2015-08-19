@@ -118,17 +118,29 @@
           return expect(checked).to.not.be.ok;
         });
 
-        // TODO: implement
-        xit('expected to populate checkbox value to hidden input', function() {
-          var ctrl = object.find('input[name=billing_express]');
+        it('expected to populate checked checkbox value to hidden input', function() {
+          var ctrl = object.find('input[name=billing_newsletter]');
           if (ctrl.prop) {
             ctrl.prop('checked', true);
           } else {
             ctrl.attr('checked', true);
           }
           ctrl.trigger('change');
-          var checked = $(ctrl.attr('data-population-target')).is(':checked');
-          return expect(checked).to.be.ok;
+          var value = $(ctrl.attr('data-population-target')).val();
+          return expect(value).to.equal('1');
+        });
+
+        it('expected to populate unchecked checkbox value to hidden input', function() {
+          var ctrl = object.find('input[name=billing_newsletter]');
+          if (ctrl.prop) {
+            ctrl.prop('checked', false);
+          } else {
+            ctrl.attr('checked', false);
+          }
+          ctrl.trigger('change');
+          var target = $(ctrl.attr('data-population-target'));
+          return expect(target.is(':disabled')).to.be.ok &&
+            expect(target.val()).to.be.empty;
         });
 
         it('expected to populate radio value', function() {

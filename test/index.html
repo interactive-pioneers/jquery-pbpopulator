@@ -22,9 +22,11 @@
     <input type="radio" name="billing_payment" value="wire" data-population-target="input[name=shipping_payment]" data-population-target-manual="input[name=shipping_payment]">
     <input type="radio" name="billing_payment" value="creditcard" data-population-target="input[name=shipping_payment]" data-population-target-manual="input[name=shipping_payment]" checked="checked">
     <input type="checkbox" name="billing_express" data-population-target="#js_shipping_express" data-population-target-manual="#js_shipping_express">
+    <input type="checkbox" name="billing_newsletter" data-population-target="#js_billing_subscription" data-population-target-manual="#js_billing_subscription">
     <input type="password" name="billing_password" data-population-target="#js_billing_password_confirm,#js_shipping_password,#js_shipping_password_confirm" data-population-target-manual="#js_billing_password_confirm,#js_shipping_password,#js_shipping_password_confirm">
     <input type="password" name="billing_password_confirm" id="js_billing_password_confirm">
     <input type="hidden" name="billing_hash" value="43909fs09f5jk6j5j49138otr7834" data-population-target="#js_shipping_hash" data-population-target-manual="#js_shipping_hash">
+    <input type="hidden" name="billing_subscription" value="0" id="js_billing_subscription" disabled="disabled">
   </form>
 
   <form action="#shipping">
