@@ -1,7 +1,7 @@
 {
   "name": "iptools-jquery-populator",
-  "description": "Form field populator",
-  "version": "0.0.1",
+  "description": "jQuery populator plugin that syncs values between form controls",
+  "version": "0.1.0",
   "license": "GPL-3.0",
   "main": "src/iptools-jquery-populator.js",
   "ignore": [
