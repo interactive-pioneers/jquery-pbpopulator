@@ -50,6 +50,21 @@ Event structure:
 ## Example
 
 _Coming soon_.
+```html
+<form action="/billing">
+  <input type="text" name="billing_name" value="Max Mustermann" data-population-target="#js_shipping_name">
+</form>
+
+<form action="/shipping">
+  <input type="text" name="shipping_name" id="js_shipping_name">
+</form>
+
+<script>
+jQuery.ready(function() {
+  $('form:first').iptPopulator();
+});
+</script>
+```
 
 ## Contributions
 
