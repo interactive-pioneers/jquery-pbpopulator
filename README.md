@@ -4,9 +4,13 @@ jQuery plugin that populates form control value(s) to other control(s).
 
 ## Installation
 
-```
-bower install iptools-jquery-populator
-```
+- Bower
+
+        $ bower install iptools-jquery-populator
+
+- NPM
+
+        $ npm install iptools-jquery-populator
 
 ## Features
 
