@@ -1,6 +1,9 @@
 'use strict';
 
-/* jshint undef: false, expr: true */
+/* global expect */
+
+/* Disable JSHint complaining about async Mocha expects */
+/* jshint -W030 */
 
 (function() {
 

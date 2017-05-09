@@ -19,22 +19,6 @@
 
     var self = this;
 
-    this.destroy = function() {
-      removeEventListeners();
-      this.element.removeData('plugin_' + pluginName);
-    };
-
-    this.populate = function(element) {
-      var target = getPopulationTarget(element);
-      populateForControl(element, target);
-    };
-
-    this.populateManual = function() {
-      getManualTargeteers().each(function() {
-        populateForControl(this, getManualPopulationTarget(this));
-      });
-    };
-
     function getPopulationTarget(control) {
       return $(control).attr('data-' + datas.populationTarget);
     }
@@ -51,26 +35,8 @@
       return self.element.find('*[data-' + datas.populationTarget + ']');
     }
 
-    function addEventListener(control) {
-      switch (getControlType(control)) {
-        case 'input_text':
-        case 'input_password':
-        case 'input_phone':
-        case 'input_email':
-          $(control).bind(getNamespacedEvent('blur'), handlePopulationRequest);
-          break;
-        default:
-          $(control).bind(getNamespacedEvent('change'), handlePopulationRequest);
-          break;
-      }
-    }
-
     function getNamespacedEvent(event) {
       return event + '.' + pluginName;
-    }
-
-    function handlePopulationRequest(event) {
-      self.populate(event.currentTarget);
     }
 
     function removeEventListeners() {
@@ -158,6 +124,40 @@
           target: $targetControl,
           source: $(control)
         });
+      }
+    }
+
+    this.destroy = function() {
+      removeEventListeners();
+      this.element.removeData('plugin_' + pluginName);
+    };
+
+    this.populate = function(element) {
+      var target = getPopulationTarget(element);
+      populateForControl(element, target);
+    };
+
+    this.populateManual = function() {
+      getManualTargeteers().each(function() {
+        populateForControl(this, getManualPopulationTarget(this));
+      });
+    };
+
+    function handlePopulationRequest(event) {
+      self.populate(event.currentTarget);
+    }
+
+    function addEventListener(control) {
+      switch (getControlType(control)) {
+        case 'input_text':
+        case 'input_password':
+        case 'input_phone':
+        case 'input_email':
+          $(control).bind(getNamespacedEvent('blur'), handlePopulationRequest);
+          break;
+        default:
+          $(control).bind(getNamespacedEvent('change'), handlePopulationRequest);
+          break;
       }
     }
 
