@@ -45,7 +45,7 @@ Event structure:
 
 ## Requirements
 
-- jQuery 1.3.2 or greater
+- jQuery >=1.3.2 <4.0.0
 
 ## Example
 
