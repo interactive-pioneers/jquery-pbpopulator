@@ -44,5 +44,11 @@
     "jquery",
     "form",
     "html5"
+  ],
+  "files": [
+    "*.md",
+    "LICENSE",
+    "src",
+    "dist"
   ]
 }
