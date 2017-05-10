@@ -1,7 +1,6 @@
 {
   "name": "iptools-jquery-populator",
   "description": "jQuery plugin that populates form control value(s) to other control(s)",
-  "version": "0.1.0",
   "license": "GPL-3.0",
   "main": "src/iptools-jquery-populator.js",
   "ignore": [
